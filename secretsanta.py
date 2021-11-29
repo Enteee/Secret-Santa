@@ -15,7 +15,7 @@ parser.add_argument(
 )
 
 parser.add_argument(
-        '--host',
+        '--print_host',
         type=str,
         default="localhost",
         help='Host to run webserver on',
@@ -24,7 +24,7 @@ parser.add_argument(
 parser.add_argument(
         '--port',
         type=int,
-        default=random.randint(1025, 65535),
+        default=80,
         help='Port to run webserver on'
 )
 args = parser.parse_args()
@@ -60,10 +60,10 @@ def main():
             santa ,
             santas[ (i+1) % len(santas) ]
         )
-        print(f"{santa}: http://{args.host}:{args.port}/{secret}")
+        print(f"{santa}: http://{args.print_host}:{args.port}/{secret}")
 
     # Start Server
-    app.run(host=args.host, port=args.port)
+    app.run(host="0.0.0.0", port=args.port)
 
 if __name__ == "__main__":
     main()
