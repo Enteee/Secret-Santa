@@ -10,6 +10,5 @@ docker run \
   -p "${PORT}:${PORT}" \
   "${IMAGE}" \
     "secretsanta.py" \
-      --print_host "${HOSTNAME}" \
       --port "${PORT}" \
       "$@"
