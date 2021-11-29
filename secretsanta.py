@@ -43,7 +43,7 @@ def get_secret(secret):
         santa, dest = secret_to_santa[secret]
     except KeyError:
         abort(404, description="Secret was not found")
-    return f"{santa} du bist secret santa von: {dest}"
+    return f"<html><body><h1>{santa} du bist secret santa von: {dest}</h1></body></html>"
 
 def make_secret():
     alphabet = string.ascii_letters + string.digits
