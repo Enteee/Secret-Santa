@@ -65,11 +65,17 @@ def main():
     santas = args.santas
     random.shuffle(santas)
 
+    to_print = []
     for i, santa in enumerate(santas):
         secret = make_secret()
         dst_santa = santas[ (i+1) % len(santas) ]
         secret_to_santa[secret] = ( santa , dst_santa)
-        print(f"{santa}: http://{args.print_host}:{args.port}/{secret}")
+        to_print.append(f"{santa}: http://{args.print_host}:{args.port}/{secret}")
+
+    # print after shuffling
+    random.shuffle(to_print)
+    for l in to_print:
+        print(l)
 
     # Start Server
     app.run(host="0.0.0.0", port=args.port)
