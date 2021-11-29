@@ -27,6 +27,14 @@ parser.add_argument(
         default=80,
         help='Port to run webserver on'
 )
+
+parser.add_argument(
+        '--seed',
+        type=int,
+        default=secrets.randbits(128),
+        help='Random seed'
+)
+
 args = parser.parse_args()
 
 app = Flask(__name__)
@@ -47,19 +55,20 @@ def get_secret(secret):
 
 def make_secret():
     alphabet = string.ascii_letters + string.digits
-    secret = ''.join(secrets.choice(alphabet) for i in range(15))
+    secret = ''.join(random.choice(alphabet) for i in range(15))
     return secret
 
 def main():
+    random.seed(args.seed)
+    print(f"Random Seed: {args.seed}")
+
     santas = args.santas
     random.shuffle(santas)
 
     for i, santa in enumerate(santas):
         secret = make_secret()
-        secret_to_santa[secret] = (
-            santa ,
-            santas[ (i+1) % len(santas) ]
-        )
+        dst_santa = santas[ (i+1) % len(santas) ]
+        secret_to_santa[secret] = ( santa , dst_santa)
         print(f"{santa}: http://{args.print_host}:{args.port}/{secret}")
 
     # Start Server
