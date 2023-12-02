@@ -29,6 +29,20 @@ parser.add_argument(
 )
 
 parser.add_argument(
+        '--tls-cert',
+        type=str,
+        default=None,
+        help='TLS certificate path'
+)
+
+parser.add_argument(
+        '--tls-key',
+        type=str,
+        default=None,
+        help='TLS key path'
+)
+
+parser.add_argument(
         '--seed',
         type=int,
         default=secrets.randbits(128),
@@ -36,6 +50,12 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
+
+# TLS setup
+if args.tls_cert is not None and args.tls_key is not None:
+    tls_context = (args.tls_cert, args.tls_key)
+else:
+    tls_context = 'adhoc'
 
 app = Flask(__name__)
 
@@ -70,7 +90,7 @@ def main():
         secret = make_secret()
         dst_santa = santas[ (i+1) % len(santas) ]
         secret_to_santa[secret] = ( santa , dst_santa)
-        to_print.append(f"{santa}: http://{args.print_host}:{args.port}/{secret}")
+        to_print.append(f"{santa}: https://{args.print_host}:{args.port}/{secret}")
 
     # print after shuffling
     random.shuffle(to_print)
@@ -78,7 +98,11 @@ def main():
         print(l)
 
     # Start Server
-    app.run(host="0.0.0.0", port=args.port)
+    app.run(
+        host="0.0.0.0",
+        ssl_context=tls_context,
+        port=args.port,
+    )
 
 if __name__ == "__main__":
     main()

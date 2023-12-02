@@ -8,7 +8,7 @@
     pname = "secret-santa";
     version = "1.0";
 
-    propagatedBuildInputs = [ flask ];
+    propagatedBuildInputs = [ flask cryptography ];
 
     src = ./.;
   }
