@@ -82,7 +82,7 @@ def main():
     random.seed(args.seed)
     print(f"Random Seed: {args.seed}")
 
-    santas = args.santas
+    santas = args.santas.copy()
     random.shuffle(santas)
 
     to_print = []
