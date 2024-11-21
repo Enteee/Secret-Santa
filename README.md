@@ -1,4 +1,4 @@
-# Secret Santa Tool
+# Secret Santa
 
 This Secret Santa tool assigns each participant a gift recipient and provides them with a unique link to view their assignment. You can run it locally, through Docker using the provided `run.sh` script, or set up a reproducible development environment with `nix` and `direnv`.
 
