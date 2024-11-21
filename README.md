@@ -36,7 +36,7 @@ With `nix` and `direnv`, all dependencies will be configured, and you'll have a 
 Run the Secret Santa tool from the command line, specifying participants and optional server settings.
 
 ```bash
-python secret_santa.py [options] santas...
+python secretsanta.py [options] santas...
 ```
 
 #### Required Argument
@@ -56,7 +56,7 @@ python secret_santa.py [options] santas...
 To assign Secret Santa participants and run the server on `localhost`, port `5000`:
 
 ```bash
-python secret_santa.py --print_host "localhost" --port 5000 Alice Bob Charlie
+python secretsanta.py --print_host "localhost" --port 5000 Alice Bob Charlie
 ```
 
 This will generate and print unique links for each participant, displaying their Secret Santa assignment when visited.
