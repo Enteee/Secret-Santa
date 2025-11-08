@@ -1,6 +1,6 @@
 FROM nixos/nix
 
-RUN nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+RUN nix-channel --add https://nixos.org/channels/nixos-25.05 nixpkgs
 RUN nix-channel --update
 
 COPY *.nix *.py /secret-santa/
